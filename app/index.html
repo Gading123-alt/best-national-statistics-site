@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Statistik Indonesia — Data Nasional dari BPS</title>
+<meta name="description" content="Statistik Indonesia: penduduk, ekonomi, pendidikan dan kesehatan, serta perbandingan 38 provinsi — angka resmi BPS dengan sumber dan tahun yang jelas.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23123a5c'/%3E%3Crect x='7' y='16' width='4' height='9' fill='%2322a3b8'/%3E%3Crect x='14' y='11' width='4' height='14' fill='%23ffffff'/%3E%3Crect x='21' y='7' width='4' height='18' fill='%230e7490'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo" aria-hidden="true">
+      <svg viewBox="0 0 32 32" width="32" height="32"><rect width="32" height="32" rx="7" fill="#fff"/><rect x="7" y="16" width="4" height="9" fill="#22a3b8"/><rect x="14" y="11" width="4" height="14" fill="#123a5c"/><rect x="21" y="7" width="4" height="18" fill="#0e7490"/></svg>
+    </span>
+    <div>
+      <h1>Statistik Indonesia</h1>
+      <p>Data nasional Indonesia — angka resmi, sumber jelas.</p>
+    </div>
+  </div>
+  <div class="databox">
+    <span class="databox-label">Data utama</span>
+    <strong>BPS, 2024</strong>
+    <span class="databox-note">Angka dibulatkan</span>
+  </div>
+</header>
+
+<nav class="mainnav" aria-label="Navigasi utama">
+  <a href="#/" data-route="ringkasan" class="active">Ringkasan</a>
+  <a href="#/penduduk" data-route="penduduk">Penduduk</a>
+  <a href="#/ekonomi" data-route="ekonomi">Ekonomi</a>
+  <a href="#/pendidikan" data-route="pendidikan">Pendidikan &amp; Kesehatan</a>
+  <a href="#/provinsi" data-route="provinsi">Provinsi</a>
+</nav>
+
+<main>
+  <!-- ============ RINGKASAN ============ -->
+  <section id="view-ringkasan" class="view">
+    <p class="intro">Gambaran Indonesia dalam satu halaman: berapa penduduknya, seberapa besar ekonominya, dan bagaimana kualitas hidup warganya. Setiap angka di bawah ini mencantumkan sumber dan tahunnya.</p>
+    <div class="cards">
+      <article class="card">
+        <h2>Penduduk</h2>
+        <p class="big" id="kPenduduk">282 jt jiwa</p>
+        <p class="sub">Tumbuh 0,8% per tahun</p>
+        <p class="src">Sumber: BPS, 2024</p>
+      </article>
+      <article class="card">
+        <h2>PDB</h2>
+        <p class="big">Rp 22.100 T</p>
+        <p class="sub">Tumbuh 5,03% pada 2024</p>
+        <p class="src">Sumber: BPS, 2024</p>
+      </article>
+      <article class="card">
+        <h2>Inflasi</h2>
+        <p class="big">1,57%</p>
+        <p class="sub">Tahunan, Desember 2024</p>
+        <p class="src">Sumber: BPS, 2024</p>
+      </article>
+      <article class="card">
+        <h2>Pengangguran</h2>
+        <p class="big">4,91%</p>
+        <p class="sub">Turun dari 5,45% (2023)</p>
+        <p class="src">Sumber: BPS, 2024</p>
+      </article>
+      <article class="card">
+        <h2>Kemiskinan</h2>
+        <p class="big">9,03%</p>
+        <p class="sub">Turun dari 9,36% (2023)</p>
+        <p class="src">Sumber: BPS, 2024</p>
+      </article>
+      <article class="card">
+        <h2>IPM</h2>
+        <p class="big">75,02</p>
+        <p class="sub">Kategori tinggi</p>
+        <p class="src">Sumber: BPS, 2024</p>
+      </article>
+    </div>
+
+    <div class="grid2">
+      <article class="panel">
+        <h2>Jumlah Penduduk 2020–2024</h2>
+        <p class="hint">Dalam juta jiwa. Penduduk Indonesia bertambah sekitar 3 juta jiwa setiap tahun.</p>
+        <canvas id="chartPenduduk" width="640" height="280" aria-label="Grafik batang jumlah penduduk 2020 sampai 2024"></canvas>
+        <p class="src">Sumber: BPS, 2020–2024 (angka dibulatkan)</p>
+      </article>
+      <article class="panel">
+        <h2>Pertumbuhan Ekonomi 2020–2024</h2>
+        <p class="hint">Persen per tahun. Ekonomi sempat minus saat pandemi 2020, lalu tumbuh stabil di atas 5%.</p>
+        <canvas id="chartPdb" width="640" height="280" aria-label="Grafik garis pertumbuhan ekonomi 2020 sampai 2024"></canvas>
+        <p class="src">Sumber: BPS, 2020–2024</p>
+      </article>
+    </div>
+
+    <article class="panel">
+      <h2>5 Provinsi Terpadat Penduduknya</h2>
+      <p class="hint">Jawa Barat, Jawa Timur, dan Jawa Tengah dihuni lebih dari separuh penduduk Indonesia.</p>
+      <canvas id="chartTopProv" width="640" height="220" aria-label="Grafik batang lima provinsi dengan penduduk terbanyak"></canvas>
+      <p class="src">Sumber: BPS, 2024 (angka dibulatkan)</p>
+      <a class="btn ghost" href="#/provinsi">Lihat semua 38 provinsi →</a>
+    </article>
+  </section>
+
+  <!-- ============ PENDUDUK ============ -->
+  <section id="view-penduduk" class="view hidden">
+    <div class="cards">
+      <article class="card">
+        <h2>Jumlah Penduduk</h2>
+        <p class="big">282 jt jiwa</p>
+        <p class="sub">Perkiraan pertengahan 2024</p>
+        <p class="src">Sumber: BPS, 2024</p>
+      </article>
+      <article class="card">
+        <h2>Laju Pertumbuhan</h2>
+        <p class="big">0,8% / tahun</p>
+        <p class="sub">Melambat dari 1% lebih pada 2010-an</p>
+        <p class="src">Sumber: BPS, 2024</p>
+      </article>
+      <article class="card">
+        <h2>Kepadatan</h2>
+        <p class="big">147 jiwa/km²</p>
+        <p class="sub">Sangat padat di Jawa, renggang di Papua</p>
+        <p class="src">Sumber: BPS, 2024</p>
+      </article>
+      <article class="card">
+        <h2>Provinsi Terpadat</h2>
+        <p class="big">DKI Jakarta</p>
+        <p class="sub">±15.900 jiwa/km²</p>
+        <p class="src">Sumber: BPS, 2024 (dihitung)</p>
+      </article>
+    </div>
+
+    <article class="panel">
+      <h2>Tren Penduduk 2020–2024</h2>
+      <p class="hint">Dalam juta jiwa. Kenaikan stabil sekitar 3 juta jiwa per tahun.</p>
+      <canvas id="chartPenduduk2" width="640" height="280" aria-label="Grafik batang jumlah penduduk 2020 sampai 2024"></canvas>
+      <p class="src">Sumber: BPS, 2020–2024 (angka dibulatkan)</p>
+    </article>
+
+    <article class="panel">
+      <h2>Di Mana Penduduk Indonesia Tinggal?</h2>
+      <p class="hint">Sekitar 56% penduduk tinggal di Pulau Jawa, meski luas Jawa hanya sekitar 7% wilayah Indonesia.</p>
+      <table class="tx" id="pulauTable">
+        <thead><tr><th>Pulau / Wilayah</th><th class="num">Penduduk (2024)</th><th class="num">Pangsa</th></tr></thead>
+        <tbody>
+          <tr><td>Jawa</td><td class="num">±157 jt jiwa</td><td class="num">56%</td></tr>
+          <tr><td>Sumatera</td><td class="num">±61 jt jiwa</td><td class="num">22%</td></tr>
+          <tr><td>Kalimantan</td><td class="num">±18 jt jiwa</td><td class="num">6%</td></tr>
+          <tr><td>Sulawesi</td><td class="num">±21 jt jiwa</td><td class="num">7%</td></tr>
+          <tr><td>Bali &amp; Nusa Tenggara</td><td class="num">±16 jt jiwa</td><td class="num">6%</td></tr>
+          <tr><td>Maluku &amp; Papua</td><td class="num">±9 jt jiwa</td><td class="num">3%</td></tr>
+        </tbody>
+      </table>
+      <p class="src">Sumber: BPS, 2024 (angka dibulatkan dari data provinsi)</p>
+    </article>
+
+    <article class="panel">
+      <h2>Kalkulator Kepadatan Penduduk</h2>
+      <p class="hint">Masukkan jumlah penduduk dan luas wilayah, lalu tekan Hitung — kepadatan muncul dalam jiwa per km².</p>
+      <form id="densityForm" class="formgrid">
+        <label>Jumlah penduduk (jiwa)
+          <input id="dPop" type="number" min="1" step="1" value="10560000" required>
+        </label>
+        <label>Luas wilayah (km²)
+          <input id="dArea" type="number" min="1" step="1" value="664" required>
+        </label>
+        <div class="formactions">
+          <button class="btn primary" type="submit">Hitung Kepadatan</button>
+        </div>
+      </form>
+      <p class="result" id="densityResult">Contoh: DKI Jakarta — 10.560.000 jiwa di 664 km² = ±15.900 jiwa/km².</p>
+      <p class="src">Rumus: jumlah penduduk ÷ luas wilayah. Contoh memakai data BPS, 2024.</p>
+    </article>
+  </section>
+
+  <!-- ============ EKONOMI ============ -->
+  <section id="view-ekonomi" class="view hidden">
+    <div class="cards">
+      <article class="card">
+        <h2>PDB Nominal</h2>
+        <p class="big">Rp 22.100 T</p>
+        <p class="sub">Produk Domestik Bruto 2024</p>
+        <p class="src">Sumber: BPS, 2024</p>
+      </article>
+      <article class="card">
+        <h2>PDB per Kapita</h2>
+        <p class="big">Rp 78 jt</p>
+        <p class="sub">Per orang per tahun, 2024</p>
+        <p class="src">Sumber: BPS, 2024</p>
+      </article>
+      <article class="card">
+        <h2>Inflasi</h2>
+        <p class="big">1,57%</p>
+        <p class="sub">Tahunan, Desember 2024</p>
+        <p class="src">Sumber: BPS, 2024</p>
+      </article>
+      <article class="card">
+        <h2>Pengangguran</h2>
+        <p class="big">4,91%</p>
+        <p class="sub">Agustus 2024 — terendah sejak 2020</p>
+        <p class="src">Sumber: BPS, 2024</p>
+      </article>
+    </div>
+
+    <div class="grid2">
+      <article class="panel">
+        <h2>Pertumbuhan Ekonomi 2020–2024</h2>
+        <p class="hint">Persen per tahun. Kontraksi −2,07% pada 2020, pulih ke 5,03% pada 2024.</p>
+        <canvas id="chartPdb2" width="640" height="280" aria-label="Grafik garis pertumbuhan ekonomi 2020 sampai 2024"></canvas>
+        <p class="src">Sumber: BPS, 2020–2024</p>
+      </article>
+      <article class="panel">
+        <h2>Pengangguran &amp; Kemiskinan 2020–2024</h2>
+        <p class="hint">Persen. Keduanya turun setiap tahun sejak 2020.</p>
+        <canvas id="chartKerja" width="640" height="280" aria-label="Grafik garis pengangguran dan kemiskinan 2020 sampai 2024"></canvas>
+        <p class="src">Sumber: BPS, 2020–2024</p>
+      </article>
+    </div>
+
+    <article class="panel">
+      <h2>Angka Kunci Ekonomi</h2>
+      <table class="tx">
+        <thead><tr><th>Indikator</th><th class="num">Nilai</th><th>Tahun</th><th>Sumber</th></tr></thead>
+        <tbody>
+          <tr><td>Pertumbuhan ekonomi</td><td class="num">5,03%</td><td>2024</td><td>BPS</td></tr>
+          <tr><td>Inflasi tahunan</td><td class="num">1,57%</td><td>2024</td><td>BPS</td></tr>
+          <tr><td>Tingkat pengangguran terbuka</td><td class="num">4,91%</td><td>2024</td><td>BPS</td></tr>
+          <tr><td>Tingkat kemiskinan</td><td class="num">9,03%</td><td>2024</td><td>BPS</td></tr>
+          <tr><td>Rasio gini (ketimpangan)</td><td class="num">±0,38</td><td>2024</td><td>BPS</td></tr>
+          <tr><td>PDB per kapita</td><td class="num">±Rp 78 jt</td><td>2024</td><td>BPS</td></tr>
+        </tbody>
+      </table>
+      <p class="src">Semua angka dibulatkan ke nilai wajar. Sumber: BPS, 2024.</p>
+    </article>
+  </section>
+
+  <!-- ============ PENDIDIKAN & KESEHATAN ============ -->
+  <section id="view-pendidikan" class="view hidden">
+    <div class="cards">
+      <article class="card">
+        <h2>Indeks Pembangunan Manusia</h2>
+        <p class="big">75,02</p>
+        <p class="sub">Kategori tinggi, naik dari 74,39 (2023)</p>
+        <p class="src">Sumber: BPS, 2024</p>
+      </article>
+      <article class="card">
+        <h2>Angka Harapan Hidup</h2>
+        <p class="big">74,2 tahun</p>
+        <p class="sub">Bayi lahir 2024 diperkirakan hidup selama itu</p>
+        <p class="src">Sumber: BPS, 2024</p>
+      </article>
+      <article class="card">
+        <h2>Rata-rata Lama Sekolah</h2>
+        <p class="big">9,1 tahun</p>
+        <p class="sub">Penduduk usia 25 tahun ke atas, 2024</p>
+        <p class="src">Sumber: BPS, 2024</p>
+      </article>
+      <article class="card">
+        <h2>Melek Huruf (15+)</h2>
+        <p class="big">±97%</p>
+        <p class="sub">Penduduk usia 15 tahun ke atas bisa baca-tulis</p>
+        <p class="src">Sumber: BPS, 2024</p>
+      </article>
+    </div>
+
+    <article class="panel">
+      <h2>IPM Indonesia 2020–2024</h2>
+      <p class="hint">Indeks Pembangunan Manusia naik terus — dari 71,94 pada 2020 menjadi 75,02 pada 2024.</p>
+      <canvas id="chartIpm" width="640" height="280" aria-label="Grafik garis IPM 2020 sampai 2024"></canvas>
+      <p class="src">Sumber: BPS, 2020–2024</p>
+    </article>
+
+    <article class="panel">
+      <h2>Apa Artinya Angka-angka Ini?</h2>
+      <ul class="explain">
+        <li><strong>IPM 75,02</strong> — mengukur kesehatan, pendidikan, dan standar hidup. Di atas 70 berarti kategori tinggi. <span class="src">Sumber: BPS, 2024</span></li>
+        <li><strong>Harapan hidup 74,2 tahun</strong> — naik seiring layanan kesehatan yang membaik, termasuk puskesmas dan BPJS Kesehatan. <span class="src">Sumber: BPS, 2024</span></li>
+        <li><strong>Lama sekolah 9,1 tahun</strong> — rata-rata penduduk dewasa menyelesaikan pendidikan setara kelas 9 (SMP). Target pemerintah: 12 tahun. <span class="src">Sumber: BPS, 2024</span></li>
+        <li><strong>Melek huruf ±97%</strong> — hampir semua penduduk dewasa bisa membaca dan menulis. <span class="src">Sumber: BPS, 2024</span></li>
+      </ul>
+    </article>
+  </section>
+
+  <!-- ============ PROVINSI ============ -->
+  <section id="view-provinsi" class="view hidden">
+    <article class="panel">
+      <h2>Semua 38 Provinsi</h2>
+      <p class="hint">Cari nama provinsi, lalu urutkan berdasarkan penduduk, luas, atau kepadatan. Klik nama kolom untuk mengurutkan.</p>
+      <div class="filters">
+        <label>Cari provinsi <input id="qProv" type="search" placeholder="cth: Jawa Barat…"></label>
+        <label>Urutkan
+          <select id="sortProv">
+            <option value="penduduk-desc">Penduduk terbanyak</option>
+            <option value="penduduk-asc">Penduduk tersedikit</option>
+            <option value="nama-asc">Nama A–Z</option>
+            <option value="nama-desc">Nama Z–A</option>
+            <option value="luas-desc">Luas terluas</option>
+            <option value="padat-desc">Terpadat</option>
+            <option value="padat-asc">Paling renggang</option>
+          </select>
+        </label>
+      </div>
+      <div class="tablewrap">
+        <table class="tx" id="provTable">
+          <thead><tr>
+            <th><button class="thbtn" data-sort="nama">Provinsi</button></th>
+            <th class="num"><button class="thbtn" data-sort="penduduk">Penduduk</button></th>
+            <th class="num"><button class="thbtn" data-sort="luas">Luas (km²)</button></th>
+            <th class="num"><button class="thbtn" data-sort="padat">Kepadatan (jiwa/km²)</button></th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <p class="hint" id="provCount"></p>
+      <p class="src">Sumber: BPS, 2024 (angka dibulatkan; kepadatan dihitung dari penduduk ÷ luas)</p>
+    </article>
+
+    <article class="panel">
+      <h2>Bandingkan Dua Provinsi</h2>
+      <p class="hint">Pilih dua provinsi untuk melihat penduduk, luas, dan kepadatannya berdampingan.</p>
+      <div class="filters">
+        <label>Provinsi A <select id="cmpA"></select></label>
+        <label>Provinsi B <select id="cmpB"></select></label>
+      </div>
+      <div class="compare" id="compareBox"></div>
+    </article>
+  </section>
+</main>
+
+<footer>
+  <p>Statistik Indonesia — angka dibulatkan dari publikasi Badan Pusat Statistik (BPS), 2020–2024. Situs ini statis dan luring: tidak ada pelacak, tidak ada cookie, tidak ada data yang dikirim ke mana pun.</p>
+  <p><a href="#/">Ringkasan</a> · <a href="#/penduduk">Penduduk</a> · <a href="#/ekonomi">Ekonomi</a> · <a href="#/pendidikan">Pendidikan &amp; Kesehatan</a> · <a href="#/provinsi">Provinsi</a></p>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
